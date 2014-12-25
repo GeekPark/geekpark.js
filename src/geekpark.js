@@ -136,9 +136,8 @@ $(function() {
       }
     },
     loadingBtn: {
-      createNew: function($link) {
-        var img = "<img class='loading-img' src='/s/loading_white.gif'" +
-          "style='display: hidden;'>";
+      createNew: function($link, loadingGif) {
+        var img = '<img src="'+loadingGif+'" style="display: hidden" />';
         $link.after(img);
         var $img = $link.next('.loading-img');
         return {
