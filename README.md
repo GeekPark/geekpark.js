@@ -9,7 +9,7 @@ geekpark.js
 ### 1.概述
 一个团队内部使用的javascrip库，主要着重减轻前端工作量，提高组件复用性。目前处于初级开发阶段。
 ### 2.安装
-
+* 此插件依赖jQuery框架，请先引入jQuery
 * 下载[geekpark.min.js](https://raw.githubusercontent.com/GeekPark/geekpark.js/master/assets/javascript/geekpark.min.js)到项目文件夹
 * 如果你需要使用gpalert等UI组件则还需要下载[geekpark.min.css](https://raw.githubusercontent.com/GeekPark/geekpark.js/master/assets/javascript/geekpark.min.js)文件
  
