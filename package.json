@@ -1,0 +1,22 @@
+{
+  "name": "geekpark.js",
+  "version": "1.0.0",
+  "description": "A javascript for our team .",
+  "main": "geekpark.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/GeekPark/geekpark.js.git"
+  },
+  "author": "Dongdong",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/GeekPark/geekpark.js/issues"
+  },
+  "homepage": "https://github.com/GeekPark/geekpark.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-cssmin": "^0.11.0",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-sass": "^0.17.0"
+  }
+}

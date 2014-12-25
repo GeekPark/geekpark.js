@@ -1,0 +1,85 @@
+/**
+ * This is a javascript library
+ * Author: Dongdong
+ * Version: 1.0.1
+ * Date: 2014.11.3
+ * Mail: mail@liyaodong.com
+ */
+.gptip-mask {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  position: fixed;
+  top: 0;
+  z-index: 20;
+  opacity: 0; }
+
+.gptip-mask.on {
+  opacity: 0.2; }
+
+#gptip {
+  width: 400px;
+  position: fixed;
+  z-index: 21;
+  left: 50%;
+  top: 50%;
+  margin-left: -200px;
+  margin-top: -200px;
+  border: 1px solid #555;
+  color: #fff;
+  background: #efe7e7;
+  text-align: center;
+  border-radius: 5px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  animation: zoomin 2s infinite; }
+  #gptip .gptip-title {
+    height: 40px;
+    line-height: 40px;
+    background: #66c27f;
+    border-bottom: 1px solid #555;
+    border-radius: 5px 5px 0 0; }
+  #gptip .gptip-content {
+    padding: 20px;
+    color: #222; }
+  #gptip a.gptip-close {
+    color: #fff;
+    float: right;
+    font-size: 18px;
+    display: inline-block;
+    line-height: 30px;
+    width: 30px;
+    margin-top: 4px;
+    margin-right: 4px;
+    position: absolute;
+    right: 0; }
+  #gptip a.gptip-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none; }
+  #gptip a.confirm {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 20px;
+    border: 1px solid #555;
+    background: #66c27f;
+    margin-bottom: 20px;
+    border-radius: 5px; }
+  #gptip a.confirm:hover {
+    opacity: 0.9; }
+  #gptip.on {
+    opacity: 1; }
+
+#gptip.error .gptip-title {
+  background: #AB3A3A; }
+#gptip.error a.confirm {
+  background: #AB3A3A; }
+
+@media (max-width: 768px) {
+  #gptip {
+    width: 80%;
+    left: 50%;
+    margin-left: -40%; }
+ }
+
+/*# sourceMappingURL=geekpark.css.map */
