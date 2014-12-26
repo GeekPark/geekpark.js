@@ -48,6 +48,7 @@ geekpark.js
 8. `stringTrim()`剔除`string`两边的空格
 	- GeekPark.stringTrim('geekpark ') => 'geekpark'
 9. `arrayShuffle()`打乱一个数组
+
 	```
 	var arr = [1,2,3,4,5];
 	GeekPark.arrayShuffle(arr);
@@ -56,6 +57,7 @@ geekpark.js
 	// ... 
 	```
 10. `changeWechatShare()`用于更改微信`分享到朋友圈`、`发送给朋友`的`标题`、`描述`以及`缩略图`
+
 	```
 	shareData = {
      title: xxx, // 可选
