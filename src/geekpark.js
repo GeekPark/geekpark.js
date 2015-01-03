@@ -1,7 +1,7 @@
 /**
  * This is a javascript library
  * Author: Dongdong
- * Version: 1.0.0
+ * Version: 1.0.1
  * Date: 2014.12.25
  * Mail: mail@liyaodong.com
  */
@@ -176,53 +176,6 @@ $(function() {
     }
 
   }; // GeekPark object define end
-
-  /*******GeekPark Object定义完毕，以下为扩展函数（当需要调用GeekPark已定义函数时需要写在下方）******/
-
-  // 用于动态的改变微信分享时的标题、图片、以及描述，自带微信浏览器检测
-  // shareData = {
-  //   title: xxx, // 可选
-  //   desc: xxx, // 可选
-  //   link: xxx, // 可选
-  //   img_url: xxx   // 必须
-  // }
-  GeekPark.changeWechatShare = function(shareData) {
-    if (GeekPark.isWechat()) {
-      document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-        // 如果没有该值则使用默认
-        shareData.title = shareData.title ? shareData.title : document.title;
-        shareData.desc = shareData.desc ? shareData.desc : $('meta[name=description]').attr('content');
-        shareData.link = shareData.link ? shareData.link : window.location.href;
-
-        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
-          WeixinJSBridge.invoke('sendAppMessage', {
-            "title": shareData.title,
-            "desc": shareData.desc,
-            "link": shareData.link,
-            "img_url": shareData.img_url,
-            "img_width": "160",
-            "img_height": "160"
-          }, function(res) {
-            _report('timeline', res.err_msg);
-          });
-        });
-
-        WeixinJSBridge.on('menu:share:timeline', function(argv) {
-          WeixinJSBridge.invoke('shareTimeline', {
-            "title": shareData.title,
-            "desc": shareData.desc,
-            "link": shareData.link,
-            "img_url": shareData.img_url,
-            "img_width": "160",
-            "img_height": "160"
-          }, function(res) {
-            _report('timeline', res.err_msg);
-          });
-        });
-      }, false);
-    }
-  }; // GeekPark.changeWecahtShare end
-
 
 }); // run delay end
 

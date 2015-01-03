@@ -56,21 +56,10 @@ geekpark.js
 	// [3,1,4,2,4]
 	// ... 
 	```
-10. `changeWechatShare()`用于更改微信`分享到朋友圈`、`发送给朋友`的`标题`、`描述`以及`缩略图`
-
-	```
-	shareData = {
-     title: xxx, // 可选
-     desc: xxx, // 可选
-     link: xxx, // 可选
-     img_url: xxx   // 必须
-  	}
-  	GeekPark.changeWechatShare(shareData);
-	```
-	- 如果你是`服务号`并且还想增加在朋友圈中的`来自xxx`小尾巴，请看源码，在`WeixinJSBridge.invoke('shareTimeline', {`下的参数中增加`"appid" : 公众号原始ID"
-
+	
 ### TODO：
 1. bower以及CMD/AMD组件支持
 2. grunt:watch监听文件变化
 3. autoreload支持
 4. DEMO编写
+5. 表单校验支持
