@@ -163,7 +163,7 @@ $(function() {
       $form.on('submit', function(event) {
         event.preventDefault();
         if(checkAll($form)) {
-          callback();
+          opt.callback();
         } else {
           highlight($form);
         }

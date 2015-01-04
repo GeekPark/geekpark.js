@@ -45,14 +45,16 @@
   <script src="assets/javascript/geekpark.min.js"></script>
   <script>
     $(function() {
+
+      function postData () {
+        alert('校验通过，向后台发布数据');
+      }
+
       GeekPark.formValidator({
         form : '#form-test',
         callback: postData
       });
 
-      function postData () {
-        alert('校验通过，向后台发布数据');
-      }
 
 
     });
