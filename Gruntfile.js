@@ -31,7 +31,7 @@ module.exports = function(grunt) {
     watch:{
       sass:{
         files: 'src/geekpark.scss',
-        tasks:['sass']
+        tasks:['sass','cssmin']
       },
       js:{
         files: 'src/geekpark.js',

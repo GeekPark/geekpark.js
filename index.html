@@ -8,7 +8,54 @@
 <body>
   <h1>GeekPark.js DEMO样例</h1>
   <h2>表单测试</h2>
+  <form action="" id="form-test" method="post">
+    <div class="form-item">
+      <label for="username">用户名：</label>
+      <input type="text" name="username" id="username" autofocus="autofocus" data-validate='required|min6|max20'>
+    </div>
+    <div class="form-item">
+      <label for="password">密码：</label>
+      <input type="password" name="password" id="password" data-validate='min6|max20'>
+    </div>
+    <div class="form-item">
+      <label for="repassword">重复密码：</label>
+      <input type="password" name="repassword" id="repassword" data-validate='repeat-password'>
+    </div>
+    <div class="form-item">
+      <label for="mobile">手机：</label>
+      <input type="tel" name="mobile" id="mobile" data-validate='mobile'>
+    </div>
+    <div class="form-item">
+      <label for="email">邮箱：</label>
+      <input type="email" name="email" id="email" data-validate='email'>
+    </div>
+    <div class="form-item">
+      <label for="testrequire">必须的字段：</label>
+      <input type="text" name="testrequire" id="testrequire" data-validate='required'>
+    </div>
+    <div class="form-item">
+      <label for="novalidate">无需校验：</label>
+      <input type="number" name="novalidate" id="novalidate">
+    </div>
+
+    <input type="submit" value="提交">
+  </form>
+
   <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
   <script src="assets/javascript/geekpark.min.js"></script>
+  <script>
+    $(function() {
+      GeekPark.formValidator({
+        form : '#form-test',
+        callback: postData
+      });
+
+      function postData () {
+        alert('校验通过，向后台发布数据');
+      }
+
+
+    });
+  </script>
 </body>
 </html>

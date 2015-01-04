@@ -1,7 +1,7 @@
 /**
  * This is a javascript library
  * Author: Dongdong
- * Version: 1.0.1
+ * Version: 1.1.0
  * Date: 2014.12.25
  * Mail: mail@liyaodong.com
  */
@@ -10,7 +10,7 @@
 $(function() {
   window.GeekPark = {
     // 滑动到某个DOM
-    "slideToDom": function(domid, offset, callback) {
+    slideToDom: function(domid, offset, callback) {
       if (typeof(callback) == 'function') {
         $('html,body').animate({
             scrollTop: parseInt($(domid).offset().top - offset) + 'px'
@@ -27,39 +27,13 @@ $(function() {
     },
 
     // 检测是否为retina屏幕
-    "isRetinaDisplay": function() {
+    isRetinaDisplay: function() {
       if (window.matchMedia) {
         var mq = window.matchMedia("only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen  and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx)");
         if (mq && mq.matches || (window.devicePixelRatio > 1)) {
           return true;
         } else {
           return false;
-        }
-      }
-    },
-
-    // 检测css动画是否执行完毕
-    /*
-     var transitionEvent = GeekPark.whichTransitionEvent();
-
-     $('xxx').one(transitionEvent, function(event) {
-     // Do something when the transition ends
-     });
-     */
-    "whichTransitionEvent": function() {
-      var t,
-        el = document.createElement("fakeelement");
-
-      var transitions = {
-        "transition": "transitionend",
-        "OTransition": "oTransitionEnd",
-        "MozTransition": "transitionend",
-        "WebkitTransition": "webkitTransitionEnd"
-      }
-
-      for (t in transitions) {
-        if (el.style[t] !== undefined) {
-          return transitions[t];
         }
       }
     },
@@ -173,9 +147,167 @@ $(function() {
         arr[i] = itemAtIndex;
       }
       return arr;
+    },
+  }; // GeekPark object define end
+
+  ;(function($, GeekPark) {
+
+    //用于表单验证，传入form的选择器即可，eg: #myform .myform form
+    GeekPark.formValidator = function(opt) {
+      if($(opt.form).length == 0 || typeof opt.callback !== 'function') {
+        console.error('formValidator.argument error');
+        return false;
+      }
+      var $form = $(opt.form);
+      /******「C」事件逻辑******/
+      $form.on('submit', function(event) {
+        event.preventDefault();
+        if(checkAll($form)) {
+          callback();
+        } else {
+          highlight($form);
+        }
+      });
+
+      // 监听blur事件
+      $form.find('input').each(function() {
+        // 寻找所有设置了校验规则的input
+        var rule = $(this).data('validate');
+        if(typeof rule == 'string') {
+          var validResult;
+          // 如果已经自动聚焦则直接失去焦点时检测
+          if(typeof $(this).attr('autofocus') == 'string') {
+            $(this).blur(function(event) {
+              validResult = validItem($(this), rule);
+              updateStatus(validResult, $(this));
+            });
+          } else {
+            $(this).focus(function() {
+              removeError($(this));
+              $(this).blur(function() {
+                validResult = validItem($(this), rule);
+                updateStatus(validResult, $(this));
+              });
+            });
+          }
+        }
+      });
+
+      // 高亮所有错误
+      function highlight ($dom) {
+        $dom.find('input').each(function() {
+          var rule = $(this).data('validate');
+          if(rule) {
+            var validResult = validItem($(this), rule);
+            updateStatus(validResult, $(this));
+          }
+        });
+      }
+
+    };
+
+    /******「M」数据逻辑 ******/
+
+    function validItem ($dom, rule) {
+      // 针对每个input进行规则校验
+      var ruleItem = rule.split('|'),
+          str = $dom.val(),
+          count = 0,
+          pass = 0;
+
+      // 默认给是否通过校验写上未通过
+      $dom.data('valid', 0);
+
+      for (var i = 0; i < ruleItem.length; i++) {
+        // 每个表单可能有多个校验规则
+        var result = validRule(ruleItem[i], str);
+        count ++;
+        if(result) pass++;
+      };
+
+      // 如果所有规则全部匹配成功则标记通过校验
+      if(count == pass) {
+        $dom.data('valid', 1);
+        return true;
+      } else {
+        return false;
+      }
     }
 
-  }; // GeekPark object define end
+    // 如果需要新加规则就在这里加
+    function validRule (rule, str) {
+      switch(rule) {
+        case 'required':
+          return (str.length > 0) ? true : false;
+          break;
+        case 'mobile':
+          return /^1\d{10}$/.test(str);
+          break;
+        case 'email':
+          return /^[^@]+@([^@\.]+\.)+[^@\.]+$/.test(str);
+          break;
+        case 'repeat-password':
+          return (str == $('#password').val() && str.length !== 0);
+          break;
+        default:
+          if(/^min\d+$/i.test(rule)) {
+            // min xxx
+            return (str.length >= rule.match(/\d+/)[0]);
+          } else if(/^max\d+$/i.test(rule)) {
+            return (str.length <= rule.match(/\d+/)[0]);
+          }
+          break;
+      }
+    }
+
+    // 检查是否所有校验都已通过
+    function checkAll ($form) {
+      var count = 0,
+          pass = 0;
+      $form.find('input').each(function() {
+        var rule = $(this).data('validate');
+        if(rule) {
+          count ++;
+          if($(this).data('valid') == 1) {
+            pass ++;
+          }
+        }
+      });
+      return (count == pass && pass !== 0);
+    }
+    /******「M」数据逻辑 end ******/
+
+    /******「V」视图逻辑 ******/
+    function addError ($dom) {
+      if(!$dom.hasClass('error')) {
+        $dom.addClass('error');
+      }
+
+      if(!$dom.hasClass('shakeonce')) {
+        $dom.addClass('shakeonce');
+      }
+
+      $dom.on("webkitAnimationEnd", function() {
+        $dom.removeClass('shakeonce');
+      });
+    }
+
+    function removeError ($dom) {
+      $dom.removeClass('error');
+    }
+
+    // 根据校验是否通过加上相关提示
+    function updateStatus (validResult, $dom) {
+      if(validResult) {
+        removeError($dom);
+      } else {
+        addError($dom);
+      }
+    }
+    /******「V」视图逻辑 end ******/
+
+
+  })(jQuery, GeekPark);
 
 }); // run delay end
 

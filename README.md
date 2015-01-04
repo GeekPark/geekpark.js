@@ -26,30 +26,22 @@ geekpark.js
 	- `offset`距离DOM的偏移，即滑动后距离浏览器顶部的边距
 	- `callback`滑动完成后的回调函数
 2. `isRetinaDisplay()`检测是否为Retina屏幕，返回布尔值（定义retina的界限为1.3dpi）
-3. `whichTransitionEvent()`检测某元素css动画知否执行完毕。某些浏览器原生也有检测完毕，该例子只是为了兼容性
-	```
-	var transitionEvent = GeekPark.whichTransitionEvent();
-	
-   $('xxx').one(transitionEvent, function(event) {
-     // Do something when the transition ends
-   });
-	```
-4. `alertTip()`一个弹窗组件，用于美化浏览器自带`alert()`，兼容移动版
+3. `alertTip()`一个弹窗组件，用于美化浏览器自带`alert()`，兼容移动版
 	- 参数说明： `alertTip(title, tip, type)`
 	- `title`弹窗标题`tip`弹窗正文`type(可选): error`类型
 	- 此例会使用到geekpark.css
-5. `share`对象，拥有`openWindow`和`run`方法，用于打开微博和twitter的分享。
+4. `share`对象，拥有`openWindow`和`run`方法，用于打开微博和twitter的分享。
 	- window.GeekPark.share.run(type, options)
 	- type ==> { weibo | twitter }
 	- options ==> {title: 'title', imageView: 'img url'}
-6. `loadingBtn`对象，目前拥有`createNew`方法
+5. `loadingBtn`对象，目前拥有`createNew`方法
 	- GeekPark.loadingBtn( jQueryObject, loadingGif图片地址 );
-7. `isWechat()`通过UA检测是否在微信浏览器内打开页面，返回布尔值
-8. `stringTrim()`剔除`string`两边的空格
+6. `isWechat()`通过UA检测是否在微信浏览器内打开页面，返回布尔值
+7. `stringTrim()`剔除`string`两边的空格
 	- GeekPark.stringTrim('geekpark ') => 'geekpark'
-9. `arrayShuffle()`打乱一个数组
+8. `arrayShuffle()`打乱一个数组
 
-	```
+	```javascript
 	var arr = [1,2,3,4,5];
 	GeekPark.arrayShuffle(arr);
 	// [2,1,4,5,3]
@@ -57,7 +49,33 @@ geekpark.js
 	// ... 
 	```
 	
+9.增加`formValidator`表单校验工具，通过给`input`标签增加`data-validate`属性即可使用校验器。
+
+##### HTML表单
+```
+data-validatae可能的属性
+required   必填
+min5       最少5个字段（也可以是min7 min10）
+max20      最多20个字段
+email      邮箱类型
+mobile     手机号码（以1开头的11位手机号）
+repassword 密码重复（根据#password的值来校验）
+```
+
+#####javascript调用
+```javascript
+// form 需要验证的form标签，可以是jQuery支持的任何选择器
+// callback 表单提交并验证成功时所触发的函数
+// 也就是说你不需要再阻止表单提交，专心干表单验证通过后的事情
+GeekPark.formValidator({
+  form : '#form-test',
+  callback: postData    // function name
+});
+```
+
+#####表单错误提示样式
+通过对表单内的input.error样式进行定义即可覆盖原有样式
+	
 ### TODO：
 1. bower以及CMD/AMD组件支持
-2. DEMO编写
-3. 表单校验支持
+2. DEMO样例编写

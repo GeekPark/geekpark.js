@@ -86,6 +86,43 @@
   }
 }
 
+input.error {
+  border-color: #ab3a3a;
+}
+
+// 用于表单提交错误提示
+.shakeonce {
+    position: relative;
+    animation: shakeonce 5.3s ease;
+    -webkit-animation: shakeonce 0.5s ease;
+    -o-animation: shakeonce 0.5s ease;
+    -moz-animation: shakeonce 0.5s ease;
+}
+@-webkit-keyframes shakeonce {
+  0% { left: 0; }
+  25% { left: -5px; }
+  75% { left: 5px; }
+  100% { left: 0; }
+}
+@-o-keyframes shakeonce {
+  0% { left: 0; }
+  25% { left: -5px; }
+  75% { left: 5px; }
+  100% { left: 0; }
+}
+@-moz-keyframes shakeonce {
+  0% { left: 0; }
+  25% { left: -5px; }
+  75% { left: 5px; }
+  100% { left: 0; }
+}
+@keyframes shakeonce {
+  0% { left: 0; }
+  25% { left: -5px; }
+  75% { left: 5px; }
+  100% { left: 0; }
+}
+
 @media (max-width: 768px ) {
   #gptip {
     width: 80%;
