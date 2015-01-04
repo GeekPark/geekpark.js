@@ -36,6 +36,13 @@ module.exports = function(grunt) {
       js:{
         files: 'src/geekpark.js',
         tasks:['uglify']
+      },
+      all: {
+        files: ['src/*.*','*.html'],
+        options: {
+          livereload: true,
+          interval: 1500
+        }
       }
     }
   });
