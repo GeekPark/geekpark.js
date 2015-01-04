@@ -59,7 +59,5 @@ geekpark.js
 	
 ### TODO：
 1. bower以及CMD/AMD组件支持
-2. grunt:watch监听文件变化
-3. autoreload支持
-4. DEMO编写
-5. 表单校验支持
+2. DEMO编写
+3. 表单校验支持
