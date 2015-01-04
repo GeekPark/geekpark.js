@@ -27,10 +27,21 @@ module.exports = function(grunt) {
           'assets/css/geekpark.min.css': [ "assets/css/geekpark.css" ]
         }
       }
+    },
+    watch:{
+      sass:{
+        files: 'src/geekpark.scss',
+        tasks:['sass']
+      },
+      js:{
+        files: 'src/geekpark.js',
+        tasks:['uglify']
+      }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-sass');
-  grunt.registerTask('default', ['uglify', 'cssmin', 'sass']);
+  grunt.registerTask('default', ['uglify', 'cssmin', 'sass', 'watch']);
 }
