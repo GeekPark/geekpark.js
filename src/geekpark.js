@@ -1,8 +1,8 @@
 /**
  * This is a javascript library
  * Author: Dongdong
- * Version: 1.1.0
- * Date: 2014.12.25
+ * Version: 1.1.1
+ * Date: 2014.03.09
  * Mail: mail@liyaodong.com
  */
 'use strict';
@@ -148,6 +148,26 @@ $(function() {
       }
       return arr;
     },
+
+    // 用于动态加载HTML模板
+    loadTemplate: function (templateURL, callback) {
+      $.ajax({
+        url: templateURL,
+        dataType: 'html'
+      })
+      .done(function(data) {
+        callback(data);
+      })
+      .fail(function() {
+        console.error('Load '+ templateURL +' failure .');
+      });
+    },
+
+    // 检测页面是否有JS权限
+    isPage: function(pageClass) {
+      return $('body').hasClass(pageClass) ? true : false;
+    }
+
   }; // GeekPark object define end
 
   ;(function($, GeekPark) {

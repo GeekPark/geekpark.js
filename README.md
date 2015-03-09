@@ -75,7 +75,17 @@ GeekPark.formValidator({
 
 #####表单错误提示样式
 通过对表单内的input.error样式进行定义即可覆盖原有样式
-	
+
+10. 增加loadTemplate函数，用于动态载入HTML模板
+```javascript
+loadTemplate(@templateURL, @callback function)
+```
+
+11. isPage用于检测某页面是否有JS运行权限
+```javascript
+GeekPark.isPage(@pageClass);
+// return Boolean ? true : false 
+```
 ### TODO：
 1. bower以及CMD/AMD组件支持
 2. DEMO样例编写
