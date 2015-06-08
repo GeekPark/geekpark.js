@@ -1,8 +1,8 @@
 /**
  * This is a javascript library
  * Author: Dongdong
- * Version: 1.1.1
- * Date: 2014.03.09
+ * Version: 1.1.2
+ * Date: 2014.06.08
  * Mail: mail@liyaodong.com
  */
 'use strict';
@@ -171,15 +171,20 @@ $(function() {
     // 利用UA检测是否为移动设备
     isMobile: function () {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? true : false;
+    },
+
+    // 刷新页面
+    reload: function () {
+      document.location.reload(true);
     }
 
   }; // GeekPark object define end
 
-  ;(function($, GeekPark) {
+  (function($, GeekPark) {
 
     //用于表单验证，传入form的选择器即可，eg: #myform .myform form
     GeekPark.formValidator = function(opt) {
-      if($(opt.form).length == 0 || typeof opt.callback !== 'function') {
+      if($(opt.form).length === 0 || typeof opt.callback !== 'function') {
         console.error('formValidator.argument error');
         return false;
       }
@@ -335,7 +340,3 @@ $(function() {
   })(jQuery, GeekPark);
 
 }); // run delay end
-
-
-
-
