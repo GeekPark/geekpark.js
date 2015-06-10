@@ -176,7 +176,28 @@ $(function() {
     // 刷新页面
     reload: function () {
       document.location.reload(true);
-    }
+    },
+
+    // 倒计时 {total: initnumber, dom: $(dom), callback: fun}
+    countDown: function (opt) {
+      opt.total = opt.total || 5;
+      var total = opt.total - 1;
+
+      var intervalID = window.setInterval(loopFunction, 1000);
+
+      function loopFunction() {
+        $(opt.dom).text(total);
+
+        if(total > 0) {
+          total -= 1;
+        } else {
+          if(typeof opt.callback === 'function')  {
+            opt.callback();
+            window.clearInterval(intervalID);
+          }
+        }
+      }
+    } // countDown end
 
   }; // GeekPark object define end
 
