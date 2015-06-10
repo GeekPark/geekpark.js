@@ -180,22 +180,31 @@ $(function() {
 
     // 倒计时 {total: initnumber, dom: $(dom), callback: fun}
     countDown: function (opt) {
-      opt.total = opt.total || 5;
-      var total = opt.total - 1;
-
       var intervalID = window.setInterval(loopFunction, 1000);
 
-      function loopFunction() {
-        $(opt.dom).text(total);
+      var  timer = (function () {
+        var total = opt.total || 5;
+        return {
+          minus: function () {
+            total -= 1;
+          },
+          getTotal: function () {
+            return total;
+          }
+        };
+      })();
 
-        if(total > 0) {
-          total -= 1;
+      function loopFunction(total) {
+        if(timer.getTotal() > 0) {
+          timer.minus();
         } else {
           if(typeof opt.callback === 'function')  {
             opt.callback();
             window.clearInterval(intervalID);
           }
         }
+
+        $(opt.dom).text(timer.getTotal());
       }
     } // countDown end
 
