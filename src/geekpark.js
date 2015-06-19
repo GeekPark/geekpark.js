@@ -2,7 +2,7 @@
  * This is a javascript library
  * Author: Dongdong
  * Version: 1.1.2
- * Date: 2014.06.08
+ * Date: 2014.06.19
  * Mail: mail@liyaodong.com
  */
 'use strict';
@@ -11,7 +11,7 @@ $(function() {
   window.GeekPark = {
     // 滑动到某个DOM
     slideToDom: function(domid, offset, callback) {
-      if (typeof(callback) == 'function') {
+      if (typeof callback === 'function') {
         $('html,body').animate({
             scrollTop: parseInt($(domid).offset().top - offset) + 'px'
           }, 800)
@@ -100,7 +100,7 @@ $(function() {
         type = type || 'wechat';
         options = $.extend({
           title: 'GeekPark',
-          url: location.protocol + '//' + location.hostname + location.pathname,
+          url: window.location.href,
           imageURL: ''
         }, options);
         if ($.inArray(type, Object.keys(items)) > -1) {
@@ -111,7 +111,7 @@ $(function() {
     },
     loadingBtn: {
       createNew: function($link, loadingGif) {
-        var img = '<img src="'+loadingGif+'" style="display: hidden" />';
+        var img = '<img src="' + loadingGif + '" style="display: hidden" />';
         $link.after(img);
         var $img = $link.next('.loading-img');
         return {
@@ -159,7 +159,7 @@ $(function() {
         callback(data);
       })
       .fail(function() {
-        console.error('Load '+ templateURL +' failure .');
+        console.error('Load ' + templateURL + ' failure .');
       });
     },
 
@@ -206,6 +206,7 @@ $(function() {
 
         $(opt.dom).text(timer.getTotal());
       }
+
     } // countDown end
 
   }; // GeekPark object define end
